@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const messageSchema = new mongoose.Schema({
     sender: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User", 
+        ref: "User",
         required: true,
     },
     // The original, untranslated text
@@ -14,8 +14,14 @@ const messageSchema = new mongoose.Schema({
     // CRITICAL: Map for storing { language_code: translation_string } pairs
     translations: {
         type: Map,
-        of: String, 
+        of: String,
         default: {},
+    },
+    // Room reference for room-based chat
+    roomId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Room",
+        required: true,
     },
     createdAt: {
         type: Date,
