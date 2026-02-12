@@ -13,7 +13,6 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [messages, setMessages] = useState([]);
-  const [users, setUsers] = useState([]);
   const [roomInfo, setRoomInfo] = useState(null);
   const [currentUserId, setCurrentUserId] = useState(null);
   const [username, setUsername] = useState("");
@@ -35,6 +34,7 @@ const Home = () => {
       fetchRoomInfo();
       joinRoomAndFetch();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUserId, roomCode]);
 
   useEffect(() => {
@@ -48,6 +48,7 @@ const Home = () => {
         socket.emit("leaveRoom", { roomId: roomInfo._id, username });
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomInfo, username]);
 
   useEffect(() => {
@@ -75,7 +76,6 @@ const Home = () => {
   const joinRoomAndFetch = async () => {
     try {
       await joinRoom(roomCode, currentUserId);
-      fetchUsers();
     } catch (err) {
       console.error("Error joining room:", err);
     }
@@ -94,14 +94,6 @@ const Home = () => {
     }
   };
 
-  const fetchUsers = async () => {
-    try {
-      const data = await getUsers();
-      setUsers(data);
-    } catch (err) {
-      console.error("Error fetching users:", err);
-    }
-  };
 
   const handleSend = async (text) => {
     if (!text.trim()) return;
