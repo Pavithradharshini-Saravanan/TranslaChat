@@ -3,7 +3,7 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 import ChatBox from "../components/ChatBox";
 import Message from "../components/Message";
-import { getMessages, getUsers, getRoomInfo, joinRoom, sendMessage } from "../services/api";
+import { getMessages, getRoomInfo, joinRoom, sendMessage } from "../services/api";
 
 const socket = io("http://localhost:5000");
 
