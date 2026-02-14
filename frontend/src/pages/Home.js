@@ -5,7 +5,7 @@ import ChatBox from "../components/ChatBox";
 import Message from "../components/Message";
 import { getMessages, getRoomInfo, joinRoom, sendMessage } from "../services/api";
 
-const socket = io("http://localhost:5000");
+const socket = io(process.env.REACT_APP_SOCKET_URL || "http://localhost:5000");
 
 const Home = () => {
   const { roomCode } = useParams();

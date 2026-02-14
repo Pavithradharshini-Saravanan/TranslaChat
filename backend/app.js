@@ -25,7 +25,10 @@ const server = http.createServer(app);
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    credentials: true
+}));
 app.use(bodyParser.json());
 
 // ----------------- USER ROUTES -----------------
@@ -90,7 +93,11 @@ app.post("/translate", async (req, res) => {
 
 // ----------------- SOCKET.IO SETUP -----------------
 const io = new Server(server, {
-    cors: { origin: "http://localhost:3000", methods: ["GET", "POST"] }
+    cors: {
+        origin: process.env.FRONTEND_URL || "http://localhost:3000",
+        methods: ["GET", "POST"],
+        credentials: true
+    }
 });
 
 // ⬅️ CRITICAL: Inject the io instance into the controller AFTER it's initialized
